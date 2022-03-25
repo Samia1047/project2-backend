@@ -66,5 +66,30 @@ public class ErsRestFileController {
 	        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
 	        .body(fileDB.getData());
 	  }
+	  
+	  
+	  //
+//	  @RestController
+//	  @RequestMapping("api")
+//	  public class ImageController {
+//	  	
+//	  	@Autowired
+//	  	ImageService imageService;
+//	  	
+//	  	// http://localhost:4444/api/manager/pic-upload
+//	  	@CrossOrigin(origins = "http://localhost:4200")
+//	  	@PostMapping("manager/pic-upload")
+//	  	ImagePojo uploadImage(@RequestParam("file") MultipartFile file) throws SystemException {
+//	  		return imageService.uploadImage(file);
+//	  	}
+//	  	
+//	  	// http://localhost:4444/api/manager/all-pics
+//	  	@CrossOrigin(origins = "http://localhost:4200")
+//	  	@GetMapping("manager/all-pics")
+//	  	List<ImagePojo> getAllImages() throws SystemException {
+//	  		return imageService.getAllImages();
+//	  	}
+//	  	
+//	  }
 	
 }

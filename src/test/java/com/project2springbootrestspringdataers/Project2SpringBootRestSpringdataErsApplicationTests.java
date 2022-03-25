@@ -66,7 +66,8 @@ class Project2SpringBootRestSpringdataErsApplicationTests {
 			throw new SystemException();
 		}
 				
-	}
+}
+
 	@Test
 	void loginEmployee() throws SystemException{
 	try {
@@ -167,22 +168,23 @@ void fetchAllManagers()throws SystemException {
 		}
 
 	}
-}
+
 //-----------------------Reimbursement------------
 	
-//@Test
-//void viewReimbursementPendingReq() throws SystemException{
-//	try {
-//		when(pendingReimbursmentRepository.findById(1)).thenReturn(Optional.of(new PendingReimbursmentEntity(1,1,500.55,"2022-03-07")));
-//		PendingReimbursmentPojo actualResult;
-//		actualResult = pendingReimbursmentService.viewReimbursementPendingReq(1);
-//		PendingReimbursmentPojo expectedResult = new PendingReimbursmentPojo(1,1,500.55, "2022-03-07");
-//		
-//		assertEquals(actualResult,expectedResult);
-//		verify(pendingReimbursmentRepository).findById(1);
-//	} catch (SystemException e) {
+@Test
+void viewReimbursementPendingReq() throws SystemException{
+	try {
+		when(pendingReimbursmentRepository.findById(1)).thenReturn(Optional.of(new PendingReimbursmentEntity(1,1,500.55,null)));
+		PendingReimbursmentPojo actualResult;
+		actualResult = pendingReimbursmentService.viewReimbursementPendingReq(1);
+		PendingReimbursmentPojo expectedResult = new PendingReimbursmentPojo(1,1,500.55, null);
+		
+		assertEquals(actualResult,expectedResult);
+		verify(pendingReimbursmentRepository).findById(1);
+	} catch (SystemException e) {
 
-//throw new SystemException();
-//}
+throw new SystemException();
+}
 			
-//}
+}
+}

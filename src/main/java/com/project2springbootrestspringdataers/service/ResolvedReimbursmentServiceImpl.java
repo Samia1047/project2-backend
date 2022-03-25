@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,14 @@ import com.project2springbootrestspringdataers.pojo.ResolvedReimbursmentPojo;
 
 @Service
 public class ResolvedReimbursmentServiceImpl implements ResolvedReimbursmentService{
+	public static final Logger LOG = LogManager.getLogger(ResolvedReimbursmentServiceImpl.class);
 	
 	@Autowired
 	ResolvedReimbursmentRepository resolvedReimbursmentRepository;
 	
 	@Override
 	public ResolvedReimbursmentPojo viewReimbursementResolveReq(int reimbursementId) throws SystemException {
+		LOG.info("Entered viewReimbursementResolveReq() in Service");
 		Optional<ResolvedReimbursmentEntity> entity = resolvedReimbursmentRepository.findById(reimbursementId);
 		ResolvedReimbursmentPojo resolvedReimbursmentPojo =null;
 		if(entity.isPresent()) {
@@ -31,12 +35,14 @@ public class ResolvedReimbursmentServiceImpl implements ResolvedReimbursmentServ
 					resolvedReimbursmentPojo.isRequestApproved(),
 					resolvedReimbursmentEntity.getDateResolved());
 		}
+		LOG.info("Exited viewReimbursementResolveReq() in Service");
 		return resolvedReimbursmentPojo;
 	}
 	
 	@Override
 	public ResolvedReimbursmentPojo approveOrDeny(ResolvedReimbursmentPojo resolvedReimbursmentPojo)
 			throws SystemException {
+		LOG.info("Entered approveOrDeny() in Service");
 		ResolvedReimbursmentEntity resolvedReimbursmentEntity = new ResolvedReimbursmentEntity(
 				resolvedReimbursmentPojo.getReimbursementId(),
 				resolvedReimbursmentPojo.getRequestingEmployeeId(),
@@ -56,12 +62,14 @@ public class ResolvedReimbursmentServiceImpl implements ResolvedReimbursmentServ
 				);
 		return resolvedReimbursmentPojo;
 		}
+		LOG.info("Exited approveOrDeny() in Service");
 		return resolvedReimbursmentPojo;
 	}
 
 
 	@Override
 	public List<ResolvedReimbursmentPojo> fetchAllResolveReq() throws SystemException {
+		LOG.info("Entered fetchAllResolveReq() in Service");
 		List<ResolvedReimbursmentPojo> allResolvedPojo = new ArrayList<>(); // blank list
 		List<ResolvedReimbursmentEntity> allResolveList = resolvedReimbursmentRepository.findAll();
 		
@@ -70,6 +78,7 @@ public class ResolvedReimbursmentServiceImpl implements ResolvedReimbursmentServ
 			BeanUtils.copyProperties(entity, pojo);
 			allResolvedPojo.add(pojo);
 		}
+		LOG.info("Exited fetchAllResolveReq() in Service");
 		return allResolvedPojo;
 	}
 
