@@ -1,7 +1,7 @@
 package com.project2springbootrestspringdataers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -76,7 +76,7 @@ class Project2SpringBootRestSpringdataErsApplicationTests {
 	EmployeePojo expectedResult = new EmployeePojo(1,"root","Samia", "Jahan",  "samia@gmail.com" , "D drive","");
 	
 	assertEquals(actualResult,expectedResult);
-	verify(employeeRepository).findById(1);
+	
 	}catch (SystemException e) {
 		
 		throw new SystemException();
@@ -107,11 +107,15 @@ class Project2SpringBootRestSpringdataErsApplicationTests {
  @Test
   void fetchAllEmployees() throws SystemException{
 	 try {
-		 List<EmployeeEntity>	actualResult = new ArrayList<>(); 
-		 actualResult.add(new EmployeeEntity(1,"root","Samia", "Jahan",  "samia@gmail.com" , "D drive",""));
-		 actualResult.add(new EmployeeEntity(2,"root","Shabaz", "Jahan",  "shabaj@gmail.com" , "D drive",""));
-		 when(employeeRepository.findAll()).thenReturn(actualResult);
-		 List<EmployeePojo>	expectedResult = employeeService.fetchAllEmployees();
+		 List<EmployeePojo>	expectedResult = new ArrayList<>(); 
+		 expectedResult.add(new EmployeePojo(1,"root","Samia", "Jahan",  "samia@gmail.com" , "D drive",""));
+		 expectedResult.add(new EmployeePojo(2,"root","Shabaz", "Jahan",  "shabaj@gmail.com" , "D drive",""));
+		 List<EmployeeEntity>	mockData = new ArrayList<>(); 
+		 mockData.add(new EmployeeEntity(1,"root","Samia", "Jahan",  "samia@gmail.com" , "D drive",""));
+		 mockData.add(new EmployeeEntity(2,"root","Shabaz", "Jahan",  "shabaj@gmail.com" , "D drive",""));
+		 
+		 when(employeeRepository.findAll()).thenReturn(mockData);
+		 List<EmployeePojo>	actualResult = employeeService.fetchAllEmployees();
 		 assertEquals(actualResult,expectedResult);
 	 }catch (SystemException e) {
 			
@@ -145,8 +149,8 @@ try {
 	ManagerPojo actualResult = managerService.loginManager("Poonga@gmail.com", "root");
 	ManagerPojo expectedResult = new ManagerPojo(1,"root","Poonga", "Anand","Poonga@gmail.com" ,"F drive lane","");
 
-assertEquals(actualResult,expectedResult);
-verify(employeeRepository).findById(1);
+	assertEquals(actualResult,expectedResult);
+
 }catch (SystemException e) {
 	
 	throw new SystemException();
@@ -156,11 +160,15 @@ verify(employeeRepository).findById(1);
 @Test
 void fetchAllManagers()throws SystemException {
 	 try {
-		 List<ManagerEntity>	actualResult = new ArrayList<>(); 
-		 actualResult.add(new ManagerEntity(1,"root","Poonga", "Anand","Poonga@gmail.com" ,"F drive lane",""));
-		 actualResult.add(new ManagerEntity(2,"root","Jack", "Miler",  "jack@gmail.com" , "hh high lane",""));
-		 when(managerRepository.findAll()).thenReturn(actualResult);
-		 List<ManagerPojo>	expectedResult = managerService.fetchAllManagers();
+		 List<ManagerPojo>	expectedResult = new ArrayList<>(); 
+		 expectedResult.add(new ManagerPojo(1,"root","Poonga", "Anand","Poonga@gmail.com","F drive lane",""));
+		 expectedResult.add(new ManagerPojo(2,"root","Jack", "Miler","jack@gmail.com","hh high lane",""));
+		 List<ManagerEntity>	mockResult = new ArrayList<>(); 
+		 mockResult.add(new ManagerEntity(1,"root","Poonga", "Anand","Poonga@gmail.com","F drive lane",""));
+		 mockResult.add(new ManagerEntity(2,"root","Jack", "Miler","jack@gmail.com","hh high lane",""));
+		 
+		 when(managerRepository.findAll()).thenReturn(mockResult);
+		 List<ManagerPojo>	actualResult = managerService.fetchAllManagers();
 		 assertEquals(actualResult,expectedResult);
 	 }catch (SystemException e) {
 			
@@ -180,7 +188,7 @@ void viewReimbursementPendingReq() throws SystemException{
 		PendingReimbursmentPojo expectedResult = new PendingReimbursmentPojo(1,1,500.55, null);
 		
 		assertEquals(actualResult,expectedResult);
-		verify(pendingReimbursmentRepository).findById(1);
+		
 	} catch (SystemException e) {
 
 throw new SystemException();

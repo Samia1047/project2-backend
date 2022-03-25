@@ -1,5 +1,7 @@
 package com.project2springbootrestspringdataers.pojo;
 
+import java.util.Objects;
+
 public class ManagerPojo {
 
 	private int managerId;
@@ -118,6 +120,29 @@ public class ManagerPojo {
 		return "ManagerPojo [managerId=" + managerId + ", managerPassword=" + managerPassword + ", managerFirstName="
 				+ managerFirstName + ", managerLastName=" + managerLastName + ", managerContact=" + managerContact
 				+ ", managerAddress=" + managerAddress + ", managerImageUrl=" + managerImageUrl + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(managerAddress, managerContact, managerFirstName, managerId, managerImageUrl,
+				managerLastName, managerPassword);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ManagerPojo other = (ManagerPojo) obj;
+		return Objects.equals(managerAddress, other.managerAddress)
+				&& Objects.equals(managerContact, other.managerContact)
+				&& Objects.equals(managerFirstName, other.managerFirstName) && managerId == other.managerId
+				&& Objects.equals(managerImageUrl, other.managerImageUrl)
+				&& Objects.equals(managerLastName, other.managerLastName)
+				&& Objects.equals(managerPassword, other.managerPassword);
 	}
 
 

@@ -2,6 +2,7 @@ package com.project2springbootrestspringdataers.pojo;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +67,25 @@ public class PendingReimbursmentPojo {
 		return "PendingReimbursmentPojo [reimbursementId=" + reimbursementId + ", requestingEmployeeId="
 				+ requestingEmployeeId + ", reimbursementAmount=" + reimbursementAmount + ", dateOfRequest="
 				+ dateOfRequest + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dateOfRequest, reimbursementAmount, reimbursementId, requestingEmployeeId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PendingReimbursmentPojo other = (PendingReimbursmentPojo) obj;
+		return Objects.equals(dateOfRequest, other.dateOfRequest)
+				&& Double.doubleToLongBits(reimbursementAmount) == Double.doubleToLongBits(other.reimbursementAmount)
+				&& reimbursementId == other.reimbursementId && requestingEmployeeId == other.requestingEmployeeId;
 	}
 
 
